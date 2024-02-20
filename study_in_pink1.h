@@ -27,6 +27,8 @@ bool checkTask(int e);
 void checkexp(int &exp);
 bool halfspentcheck(double M1, double spent);
 int nearestsquarenum(double n);
+int road2(int & HP1, int & EXP1, int & M1, int cases);
+int calculateP(int EXP1);
 // Task 1
 int firstMeet(int & exp1, int & exp2, int e1);
 

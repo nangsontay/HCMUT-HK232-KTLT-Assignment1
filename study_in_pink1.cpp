@@ -109,6 +109,14 @@ bool halfspentcheck(double M1, double spent)
     if (spent > (M1 / 2)) return true;
     else return false;
 }
+int calculateP(int EXP1)
+{
+    int sqnum=nearestsquarenum(EXP1);
+    int p;
+    if (EXP1>=sqnum) p=100;
+    else p=(EXP1/sqnum +80)/123;
+    return p;
+}
 int road2(int & HP1, int & EXP1, int & M1, int cases) //Use variables ref from traceLuggage
 {
     int spent=0;
@@ -151,14 +159,13 @@ int road2(int & HP1, int & EXP1, int & M1, int cases) //Use variables ref from t
             break;
         }
     }
+    checkData(HP1, M1);
+    checkexp(EXP1);
     return spent;
 }
 int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
     //Road1
-    int sqnum=nearestsquarenum(EXP1);
-    int p;
-    if (EXP1>=sqnum) p=100;
-    else p=(EXP1/sqnum +80)/123;
+    int p1=calculateP(EXP1);
     //Road2
     //check E2: Odd
     if (E2%2!=0)
@@ -170,13 +177,24 @@ int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
             if (halfspentcheck(temp, spent)) break;
             if (i+1>3) i=1;
         }
-        HP1 -= ceil((double) HP1 * 30 / 100);
+        HP1 -= floor((double) HP1 * 17 / 100);
+        EXP1 += ceil((double) EXP1 * 17 / 100);
     }
     else
     {
         //TODO: Check E2: Even
-    }
 
+        for (int i=1; i<=3; i++)
+        {
+            road2(HP1, EXP1, M1, i);
+            if (M1<=0) break;
+        }
+        if (M1<0) M1=0;
+        HP1 -= floor((double) HP1 * 17 / 100);
+        EXP1 += ceil((double) EXP1 * 17 / 100);
+    }
+    checkData(HP1, M1);
+    checkexp(EXP1);
     return HP1 + EXP1 + M1;
 }
 
