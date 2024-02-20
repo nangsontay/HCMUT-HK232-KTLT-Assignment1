@@ -111,13 +111,20 @@ int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
     if (EXP1>=sqnum) p=100;
     else p=(EXP1/sqnum +80)/123;
     //Road2
+    //Mua do an
     if (HP1<200)
     {
         HP1+=(HP1*30/100);
         M1-=150;
-
     }
-
+    else
+    {
+        HP1+=(HP1*10/100);
+        M1-=70;
+    }
+    //Thue xe
+    if (EXP1<400) M1-=200;
+    else M1-=
     return HP1 + EXP1 + M1;
 }
 
