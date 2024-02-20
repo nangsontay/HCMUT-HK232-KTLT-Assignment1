@@ -24,7 +24,7 @@ bool readFile( const string & filename, int & HP1, int & HP2, int & EXP1, int & 
 //Hàm viết thêm ở đây
 void checkData(int &HP, int &M);
 bool checkTask(int e);
-void checkexp(int exp);
+void checkexp(int &exp);
 int nearestsquarenum(double n);
 // Task 1
 int firstMeet(int & exp1, int & exp2, int e1);
