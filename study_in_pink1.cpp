@@ -47,7 +47,6 @@ bool checkTask(int e)
 
 // Task 1: CLEARED
 int firstMeet(int & exp1, int & exp2, int e1) {
-    // TODO: Complete this function
     if(!checkTask(e1)) return -99;
     if(e1<=4)
     {
@@ -92,8 +91,22 @@ int firstMeet(int & exp1, int & exp2, int e1) {
 }
 
 // Task 2
+int nearestsquarenum(double n)
+{
+    int t1= ceil(sqrt(n));
+    int t2= floor(sqrt(n));
+    t1*=t1; t2*=t2;
+    if (abs(n-t1)<abs(n-t2)) return t1;
+    else return t2;
+}
 int traceLuggage(int & HP1, int & EXP1, int & M1, int E3) {
     // TODO: Complete this function
+    int sqnum=nearestsquarenum(EXP1);
+    int p;
+    if (EXP1>=sqnum) p=100;
+    else p=(EXP1/sqnum +80)/123;
+
+
 
     return HP1 + EXP1 + M1;
 }

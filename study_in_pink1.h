@@ -21,9 +21,10 @@ bool readFile( const string & filename, int & HP1, int & HP2, int & EXP1, int & 
 /// DO NOT modify any parameters in the functions.
 ////////////////////////////////////////////////////////////////////////
 
-//Recheck and reset the data for each task
+//Hàm viết thêm ở đây
 void checkData(int &HP, int &M);
 bool checkTask(int e);
+int nearestsquarenum(double n);
 // Task 1
 int firstMeet(int & exp1, int & exp2, int e1);
 
