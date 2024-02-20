@@ -99,13 +99,13 @@ int nearestsquarenum(double n)
     if (abs(n-t1)<abs(n-t2)) return t1;
     else return t2;
 }
-int traceLuggage(int & HP1, int & EXP1, int & M1, int E3) {
-    // TODO: Complete this function
+int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
+    //Road1
     int sqnum=nearestsquarenum(EXP1);
     int p;
     if (EXP1>=sqnum) p=100;
     else p=(EXP1/sqnum +80)/123;
-
+    //Road2
 
 
     return HP1 + EXP1 + M1;

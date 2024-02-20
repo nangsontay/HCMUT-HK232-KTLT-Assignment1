@@ -1,6 +1,6 @@
-cmake_minimum_required(VERSION 3.27)
+Scmake_minimum_required(VERSION 3.27)
 # Define the project name
-project(MyProject)
+project(Assignment1)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 11)
