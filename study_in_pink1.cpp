@@ -44,7 +44,12 @@ bool checkTask(int e)
 {
     return ((e>=0)&&(e<=99));
 }
-
+void checkexp(int &exp)
+{
+    if (exp<0) exp=0;
+    if (exp > 600) exp=600;
+    return;
+}
 // Task 1: CLEARED
 int firstMeet(int & exp1, int & exp2, int e1) {
     if(!checkTask(e1)) return -99;
