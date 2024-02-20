@@ -104,6 +104,55 @@ int nearestsquarenum(double n)
     if (abs(n-t1)<abs(n-t2)) return t1;
     else return t2;
 }
+bool halfspentcheck(double M1, double spent)
+{
+    if (spent > (M1 / 2)) return true;
+    else return false;
+}
+int road2(int & HP1, int & EXP1, int & M1, int cases) //Use variables ref from traceLuggage
+{
+    int spent=0;
+    switch (cases) {
+        case 1: {
+            //Mua do an
+            if (HP1 < 200) {
+                HP1 += ceil((double) HP1 * 30 / 100);
+                M1 -= 150; spent+=150;
+            } else {
+                HP1 += ceil((double) HP1 * 10 / 100);
+                M1 -= 70; spent+=70;
+            }
+            break;
+        }
+        case 2: {
+            //Thue xe
+            if (EXP1 < 400) {
+                M1 -= 200;
+                spent+=200;
+            }
+            else {
+                M1 -= 250;
+                spent+=250;
+            }
+            EXP1 += ceil((double) EXP1 * 13 / 100);
+            break;
+        }
+
+        case 3: {
+            //Vo gia cu
+            if (EXP1 < 300) {
+                M1 -= 100;
+                spent += 100;
+            } else {
+                M1 -= 120;
+                spent += 120;
+            }
+            EXP1 -= floor((double) EXP1 * 10 / 100);
+            break;
+        }
+    }
+    return spent;
+}
 int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
     //Road1
     int sqnum=nearestsquarenum(EXP1);
@@ -111,20 +160,23 @@ int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
     if (EXP1>=sqnum) p=100;
     else p=(EXP1/sqnum +80)/123;
     //Road2
-    //Mua do an
-    if (HP1<200)
+    //check E2: Odd
+    if (E2%2!=0)
     {
-        HP1+=(HP1*30/100);
-        M1-=150;
+        int spent=0; int temp=M1;
+        for (int i=1; i<=3; i++)
+        {
+            spent+=road2(HP1, EXP1, M1, i);
+            if (halfspentcheck(temp, spent)) break;
+            if (i+1>3) i=1;
+        }
+        HP1 -= ceil((double) HP1 * 30 / 100);
     }
     else
     {
-        HP1+=(HP1*10/100);
-        M1-=70;
+        //TODO: Check E2: Even
     }
-    //Thue xe
-    if (EXP1<400) M1-=200;
-    else M1-=
+
     return HP1 + EXP1 + M1;
 }
 
