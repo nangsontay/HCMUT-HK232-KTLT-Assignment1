@@ -48,7 +48,6 @@ void checkexp(int &exp)
 {
     if (exp<0) exp=0;
     if (exp > 600) exp=600;
-    return;
 }
 // Task 1: CLEARED
 int firstMeet(int & exp1, int & exp2, int e1) {
@@ -195,7 +194,37 @@ int traceLuggage(int & HP1, int & EXP1, int & M1, int E2) {
     }
     checkData(HP1, M1);
     checkexp(EXP1);
+    int p2=calculateP(EXP1);
+    //Road3
+    const int P[10] = {32, 47, 28, 79, 100, 50, 22, 83, 64, 11};
+    int p3;
+    if (E2%10==0) p3=P[E2];
+    else {
+        int i = 0;
+        while(E2 > 0){
+            int tmp = E2 % 10;
+            i += tmp;
+            E2 /= 10;
+        }
+        p3 = P[i%10];
+    }
+    if ((p1==100)&&(p2==100)&&(p3==100)) EXP1-=floor((double)EXP1*25/100);
+    else
+    {
+        double pall=(p1+p2+p3)/3.0;
+        if (pall<50)
+        {
+            HP1-=floor((double)HP1*15/100);
+            EXP1+=ceil((double)EXP1*15/100);
+        }
+        else
+        {
+            HP1-=floor((double)HP1*10/100);
+            EXP1+=ceil((double)EXP1*20/100);
+        }
+    }
     return HP1 + EXP1 + M1;
+
 }
 
 // Task 3
