@@ -1,0 +1,125 @@
+#include "study_in_pink1.h"
+
+bool readFile(
+        const string & filename,
+        int & HP1,
+        int & HP2,
+        int & EXP1,
+        int & EXP2,
+        int & M1,
+        int & M2,
+        int & E1,
+        int & E2,
+        int & E3
+) {
+    // This function is used to read the input file,
+    // DO NOT MODIFY THIS FUNTION
+    ifstream ifs(filename);
+    if (ifs.is_open()) {
+        ifs >> HP1 >> HP2
+            >> EXP1 >> EXP2
+            >> M1 >> M2
+            >> E1 >> E2 >> E3;
+        return true;
+    }
+    else {
+        cerr << "The file is not found" << endl;
+        return false;
+    }
+}
+
+////////////////////////////////////////////////////////////////////////
+/// STUDENT'S ANSWER BEGINS HERE
+/// Complete the following functions
+/// DO NOT modify any parameters in the functions.
+////////////////////////////////////////////////////////////////////////
+//Recheck and reset the data for each task
+void checkData(int &HP, int &M){
+    if (HP>666) HP=666;
+    if (HP<0) HP=0;
+    if (M>3000) M=3000;
+    if (M<0) M=0;
+}
+bool checkTask(int e)
+{
+    return ((e>=0)&&(e<=99));
+}
+
+// Task 1: CLEARED
+int firstMeet(int & exp1, int & exp2, int e1) {
+    // TODO: Complete this function
+    if(!checkTask(e1)) return -99;
+    if(e1<=4)
+    {
+        switch (e1) {
+            case 0:
+                exp2+=29;
+                break;
+            case 1:
+                exp2+=45;
+                break;
+            case 2:
+                exp2+=75;
+                break;
+            case 3:
+                exp2+=(29+45+75);
+                break;
+        }
+        int d=e1*3+exp1*7;
+        if (d%2==0) exp1+=ceil((double)d/200);
+        else exp1-=floor((double)d/100);
+    }
+    else {
+        if (e1 <= 19) exp2 += (e1 / 4 + 19);
+        else if (e1 <= 49) exp2 += (e1 / 9 + 21);
+        else if (e1 <= 65) exp2 += (e1 / 16 + 17);
+        else if (e1 <= 79) {
+            exp2 += (e1 / 4 + 19);
+            if (exp2>200) exp2 += (e1 / 9 + 21);
+        }
+        else {
+            exp2 += (e1 / 4 + 19);
+            exp2 += (e1 / 9 + 21);
+            if (exp2>400) {
+                exp2 += (e1 / 16 + 17);
+                exp2 *= (15/100);
+            }
+        }
+        exp1-=e1;
+    }
+
+    return exp1 + exp2;
+}
+
+// Task 2
+int traceLuggage(int & HP1, int & EXP1, int & M1, int E3) {
+    // TODO: Complete this function
+
+    return HP1 + EXP1 + M1;
+}
+
+// Task 3
+int chaseTaxi(int & HP1, int & EXP1, int & HP2, int & EXP2, int E3) {
+    // TODO: Complete this function
+    
+    return -1;
+}
+
+// Task 4
+int checkPassword(const char * s, const char * email) {
+    // TODO: Complete this function
+
+    return -99;
+}
+
+// Task 5
+int findCorrectPassword(const char * arr_pwds[], int num_pwds) {
+    // TODO: Complete this function
+
+    return -1;
+}
+
+
+////////////////////////////////////////////////
+/// END OF STUDENT'S ANSWER
+////////////////////////////////////////////////
