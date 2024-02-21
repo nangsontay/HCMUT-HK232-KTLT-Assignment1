@@ -91,7 +91,7 @@ int firstMeet(int &exp1, int &exp2, int e1) {
     return exp1 + exp2;
 }
 
-// Task 2
+// Task 2: CLEARED
 int nearestsquarenum(double n) {
     int t1 = ceil(sqrt(n));
     int t2 = floor(sqrt(n));
