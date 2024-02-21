@@ -13,7 +13,8 @@
 
 #include "main.h"
 
-bool readFile( const string & filename, int & HP1, int & HP2, int & EXP1, int & EXP2, int & M1, int & M2, int & E1, int & E2, int & E3);
+bool
+readFile(const string &filename, int &HP1, int &HP2, int &EXP1, int &EXP2, int &M1, int &M2, int &E1, int &E2, int &E3);
 
 ////////////////////////////////////////////////////////////////////////
 /// STUDENT'S ANSWER BEGINS HERE
@@ -23,26 +24,35 @@ bool readFile( const string & filename, int & HP1, int & HP2, int & EXP1, int & 
 
 //Hàm viết thêm ở đây
 void checkData(int &HP, int &M);
+
 bool checkTask(int e);
+
 void checkexp(int &exp);
+
 bool halfspentcheck(double M1, double spent);
+
 int nearestsquarenum(double n);
-int road2(int & HP1, int & EXP1, int & M1, int cases);
+
+int road2(int &HP1, int &EXP1, int &M1, int cases);
+
 int calculateP(int EXP1);
+
+int simplifyNum(int a);
+
 // Task 1
-int firstMeet(int & exp1, int & exp2, int e1);
+int firstMeet(int &exp1, int &exp2, int e1);
 
 // Task 2
-int traceLuggage(int & HP1, int & EXP1, int & M1, int E2);
+int traceLuggage(int &HP1, int &EXP1, int &M1, int E2);
 
 // Task 3
-int chaseTaxi(int & HP1, int & EXP1, int & HP2, int & EXP2, int E3);
+int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3);
 
 // Task 4
-int checkPassword(const char * s, const char * email);
+int checkPassword(const char *s, const char *email);
 
 // Task 5
-int findCorrectPassword(const char * arr_pwds[], int num_pwds);
+int findCorrectPassword(const char *arr_pwds[], int num_pwds);
 
 ////////////////////////////////////////////////
 /// END OF STUDENT'S ANSWER
