@@ -216,15 +216,13 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     return HP1 + EXP1 + M1;
 }
 
-// Task 3
+// Task 3: CLEARED
 void simplifyNum(int &a) {
     while (a % 10 != 0) {
         a = a / 10 + a % 10;
     }
 }
-
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
-    // TODO: Complete this function
     int taxi[10][10], sherlock[10][10];
     int meetx = 0, meety = 0;
     //Taxi point:
@@ -243,13 +241,48 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     simplifyNum(meetx);
     simplifyNum(meety);
     //Dirty trick: Only checking Sherlock point on the meeting point
-    int max=0; int x=meetx, int y=meety;
+    int max=taxi[meetx][meety]; int x=meetx; int y=meety;
     //Duyet nua cheo trai tren
-    while((x!=0)&&(y!=0))
+    while((x!=-1)&&(y!=-1))
     {
-
+        if (taxi[x][y]>max) max=taxi[x][y];
+        --x; --y;
     }
-    return -1;
+    //Duyet nua cheo phai duoi
+    x=meetx; y=meety;
+    while((x!=9)&&(y!=-1))
+    {
+        if (taxi[x][y]>max) max=taxi[x][y];
+        ++x; --y;
+    }
+    x=meetx; y=meety;
+    while((x!=-1)&&(y!=9))
+    {
+        if (taxi[x][y]>max) max=taxi[x][y];
+        --x; ++y;
+    }
+    x=meetx; y=meety;
+    while((x!=9)&&(y!=9))
+    {
+        if (taxi[x][y]>max) max=taxi[x][y];
+        ++x; ++y;
+    }
+    //Check if they can meet at meeting point
+    if (abs(taxi[meetx][meety]) > abs(max)) {
+        EXP1 -= floor((double) EXP1 * 12 / 100);
+        HP1 -= floor((double) HP1 * 10 / 100);
+        EXP2 -= floor((double) EXP2 * 12 / 100);
+        HP2 -= floor((double) HP2 * 10 / 100);
+        return taxi[meetx][meety];
+    }
+    else
+    {
+        EXP1 += ceil((double) EXP1 * 12 / 100);
+        HP1 += ceil((double) HP1 * 10 / 100);
+        EXP2 += ceil((double) EXP2 * 12 / 100);
+        HP2 += ceil((double) HP2 * 10 / 100);
+        return max;
+    }
 }
 
 // Task 4
