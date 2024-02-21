@@ -1,5 +1,7 @@
 # ninja log v5
-1	438	7301862762247779	build.ninja	bfc3f95aa6c4dc91
+1	438	7302114636652557	build.ninja	bfc3f95aa6c4dc91
 4	350	7300650778114709	CMakeFiles/initial.dir/study_in_pink1.cpp.obj	53c76c57618c97f5
 1	474	7300637439258891	CMakeFiles/initial.dir/main.cpp.obj	b6fdd4c3203b7454
 350	511	7300650779694393	initial.exe	a4e8c7823b2cb47f
+14	514	7302114636652557	build.ninja	bfc3f95aa6c4dc91
+1	501	7302114642008975	CMakeFiles/initial.dir/main.cpp.obj	b6fdd4c3203b7454

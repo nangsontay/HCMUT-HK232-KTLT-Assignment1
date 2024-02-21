@@ -37,7 +37,7 @@ int road2(int &HP1, int &EXP1, int &M1, int cases);
 
 int calculateP(int EXP1);
 
-int simplifyNum(int a);
+void simplifyNum(int &a);
 
 // Task 1
 int firstMeet(int &exp1, int &exp2, int e1);

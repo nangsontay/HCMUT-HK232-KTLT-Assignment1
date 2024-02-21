@@ -217,31 +217,40 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
 }
 
 // Task 3
-int simplifyNum(int a) {
+void simplifyNum(int &a) {
     while (a % 10 != 0) {
         a = a / 10 + a % 10;
     }
-    return a;
 }
 
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     // TODO: Complete this function
     int taxi[10][10], sherlock[10][10];
+    int meetx = 0, meety = 0;
     //Taxi point:
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             taxi[i][j] = (E3 * j) + (i * 2) * (i - j);
         }
     }
-    //Sherlock point:
-
+    //Finding the meeting point:
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 10; j++) {
+            if (taxi[i][j] > (E3 * 2)) ++meetx;
+            if (taxi[i][j] < (E3 * -1)) ++meety;
+        }
+    }
+    simplifyNum(meetx);
+    simplifyNum(meety);
+    //Dirty trick: Only checking Sherlock point on the meeting point
+    
     return -1;
 }
 
 // Task 4
 int checkPassword(const char *s, const char *email) {
     // TODO: Complete this function
-    
+
 
     return -99;
 }
