@@ -284,7 +284,6 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         return max;
     }
 }
-
 // Task 4
 int checkPassword(const char *s, const char *email) {
     // TODO: Complete this function
