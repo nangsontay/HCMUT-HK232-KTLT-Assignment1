@@ -243,7 +243,12 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     simplifyNum(meetx);
     simplifyNum(meety);
     //Dirty trick: Only checking Sherlock point on the meeting point
-    
+    int max=0; int x=meetx, int y=meety;
+    //Duyet nua cheo trai tren
+    while((x!=0)&&(y!=0))
+    {
+
+    }
     return -1;
 }
 
