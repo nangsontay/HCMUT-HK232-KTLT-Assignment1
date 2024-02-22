@@ -107,11 +107,12 @@ bool halfspentcheck(double M1, double spent) {
     else return false;
 }
 
-int calculateP(int EXP1) {
+double calculateP(int EXP1) {
     int sqnum = nearestsquarenum(EXP1);
-    int p;
+    double p;
     if (EXP1 >= sqnum) p = 100;
-    else p = (EXP1 / sqnum + 80) / 123;
+    else p = ceil(((EXP1 / sqnum + 80.0) / 123.0) * 100);
+
     return p;
 }
 
@@ -138,8 +139,8 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
                 M1 -= 200;
                 spent += 200;
             } else {
-                M1 -= 250;
-                spent += 250;
+                M1 -= 120;
+                spent += 120;
             }
             EXP1 += ceil((double) EXP1 * 13 / 100);
             break;
@@ -164,7 +165,7 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
 
 int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     //Road1
-    int p1 = calculateP(EXP1);
+    double p1 = calculateP(EXP1);
     //Road2
     //check E2: Odd
     if (E2 % 2 != 0) {
@@ -173,7 +174,7 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         for (int i = 1; i <= 3; i++) {
             spent += road2(HP1, EXP1, M1, i);
             if (halfspentcheck(temp, spent)) break;
-            if (i + 1 > 3) i = 1;
+            if (i + 1 > 3) i = 0;
         }
         HP1 -= floor((double) HP1 * 17 / 100);
         EXP1 += ceil((double) EXP1 * 17 / 100);
@@ -189,10 +190,10 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     }
     checkData(HP1, M1);
     checkexp(EXP1);
-    int p2 = calculateP(EXP1);
+    double p2 = calculateP(EXP1);
     //Road3
     const int P[10] = {32, 47, 28, 79, 100, 50, 22, 83, 64, 11};
-    int p3;
+    double p3;
     if (E2 % 10 == 0) p3 = P[E2];
     else {
         int i = 0;
@@ -203,6 +204,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         }
         p3 = P[i % 10];
     }
+    checkData(HP1, M1);
+    checkexp(EXP1);
     if ((p1 == 100) && (p2 == 100) && (p3 == 100)) EXP1 -= floor((double) EXP1 * 25 / 100);
     else {
         double pall = (p1 + p2 + p3) / 3.0;
@@ -214,6 +217,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
             EXP1 += ceil((double) EXP1 * 20 / 100);
         }
     }
+    checkexp(EXP1);
+    checkData(HP1, M1);
     return HP1 + EXP1 + M1;
 }
 

@@ -35,7 +35,7 @@ int nearestsquarenum(double n);
 
 int road2(int &HP1, int &EXP1, int &M1, int cases);
 
-int calculateP(int EXP1);
+double calculateP(int EXP1);
 
 void simplifyNum(int &a);
 
