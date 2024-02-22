@@ -87,7 +87,8 @@ int firstMeet(int &exp1, int &exp2, int e1) {
         }
         exp1 -= e1;
     }
-
+    checkexp(exp1);
+    checkexp(exp2);
     return exp1 + exp2;
 }
 
@@ -222,6 +223,7 @@ void simplifyNum(int &a) {
         a = a / 10 + a % 10;
     }
 }
+
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     int taxi[10][10], sherlock[10][10];
     int meetx = 0, meety = 0;
@@ -241,31 +243,36 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     simplifyNum(meetx);
     simplifyNum(meety);
     //Dirty trick: Only checking Sherlock point on the meeting point
-    int max=taxi[meetx][meety]; int x=meetx; int y=meety;
+    int max = taxi[meetx][meety];
+    int x = meetx;
+    int y = meety;
     //Duyet nua cheo trai tren
-    while((x!=-1)&&(y!=-1))
-    {
-        if (taxi[x][y]>max) max=taxi[x][y];
-        --x; --y;
+    while ((x != -1) && (y != -1)) {
+        if (taxi[x][y] > max) max = taxi[x][y];
+        --x;
+        --y;
     }
     //Duyet nua cheo phai duoi
-    x=meetx; y=meety;
-    while((x!=9)&&(y!=-1))
-    {
-        if (taxi[x][y]>max) max=taxi[x][y];
-        ++x; --y;
+    x = meetx;
+    y = meety;
+    while ((x != 9) && (y != -1)) {
+        if (taxi[x][y] > max) max = taxi[x][y];
+        ++x;
+        --y;
     }
-    x=meetx; y=meety;
-    while((x!=-1)&&(y!=9))
-    {
-        if (taxi[x][y]>max) max=taxi[x][y];
-        --x; ++y;
+    x = meetx;
+    y = meety;
+    while ((x != -1) && (y != 9)) {
+        if (taxi[x][y] > max) max = taxi[x][y];
+        --x;
+        ++y;
     }
-    x=meetx; y=meety;
-    while((x!=9)&&(y!=9))
-    {
-        if (taxi[x][y]>max) max=taxi[x][y];
-        ++x; ++y;
+    x = meetx;
+    y = meety;
+    while ((x != 9) && (y != 9)) {
+        if (taxi[x][y] > max) max = taxi[x][y];
+        ++x;
+        ++y;
     }
     //Check if they can meet at meeting point
     if (abs(taxi[meetx][meety]) > abs(max)) {
@@ -274,9 +281,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         EXP2 -= floor((double) EXP2 * 12 / 100);
         HP2 -= floor((double) HP2 * 10 / 100);
         return taxi[meetx][meety];
-    }
-    else
-    {
+    } else {
         EXP1 += ceil((double) EXP1 * 12 / 100);
         HP1 += ceil((double) HP1 * 10 / 100);
         EXP2 += ceil((double) EXP2 * 12 / 100);
@@ -284,10 +289,47 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         return max;
     }
 }
+
 // Task 4
 int checkPassword(const char *s, const char *email) {
     // TODO: Complete this function
-
+    string pass = s, temp_email = email;
+    if (pass.length() < 8) return -1;
+    if (pass.length() > 20) return -2;
+    string se;
+    for (int i = 0; i < temp_email.length(); ++i) {
+        if (temp_email[i] == '@') break;
+        se += temp_email[i];
+    }
+    for (int i = 0; i < pass.length(); ++i) {
+        if (pass[i] == se[0]) {
+            //Check if the password contains the "se" string
+            bool check = true;
+            //first element is already checked
+            for (int j = i + 1; j < se.length(); ++j) {
+                if (pass[j] != se[j]) {
+                    check = false;
+                    break;
+                }
+            }
+            if (check) return (-1 * (300 + i));
+        }
+    }
+    //check duplicate characters
+    for (int i = 0; i < pass.length(); ++i)
+        if ((pass[i] == pass[i + 1]) && (pass[i] == pass[i + 2])) return (-1 * (400 + i));
+    //check special characters
+    const char specialchar[5] = {'!', '@', '#', '$', '%'};
+    bool check = false;
+    for (int i = 0; i < pass.length(); ++i) {
+        for (int j = 0; j < 5; ++j)
+            if (pass[i] == specialchar[j]) {
+                check = true;
+                break;
+            }
+        if (check) break;
+    }
+    if (!check) return -5;
 
     return -99;
 }
