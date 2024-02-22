@@ -223,10 +223,13 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
 }
 
 // Task 3: CLEARED
-void simplifyNum(int &a) {
-    while (a % 10 != 0) {
+int simplifyNum(int a) {
+    int b = a % 10;
+    while (b != a) {
         a = a / 10 + a % 10;
+        b = a % 10;
     }
+    return a;
 }
 
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
@@ -235,7 +238,8 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     //Taxi point:
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            taxi[i][j] = (E3 * j) + (i * 2) * (i - j);
+            int temp = ((E3 * j) + (i * 2)) * (i - j);
+            taxi[i][j] = temp;
         }
     }
     //Finding the meeting point:
@@ -245,8 +249,8 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
             if (taxi[i][j] < (E3 * -1)) ++meety;
         }
     }
-    simplifyNum(meetx);
-    simplifyNum(meety);
+    meetx = simplifyNum(meetx);
+    meety = simplifyNum(meety);
     //Dirty trick: Only checking Sherlock point on the meeting point
     int max = taxi[meetx][meety];
     int x = meetx;
