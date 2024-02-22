@@ -194,13 +194,17 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     //Road3
     const int P[10] = {32, 47, 28, 79, 100, 50, 22, 83, 64, 11};
     double p3;
-    if (E2 % 10 == 0) p3 = P[E2];
+    if (E2 % 10 == E2) p3 = P[E2];
     else {
         int i = 0;
         while (E2 > 0) {
             int tmp = E2 % 10;
             i += tmp;
             E2 /= 10;
+            if (i > 9) {
+                E2 = i;
+                i = 0;
+            }
         }
         p3 = P[i % 10];
     }
