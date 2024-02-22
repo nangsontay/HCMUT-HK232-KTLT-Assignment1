@@ -92,7 +92,7 @@ int firstMeet(int &exp1, int &exp2, int e1) {
     return exp1 + exp2;
 }
 
-// Task 2: CLEARED
+// Task 2: CLEARED BOTH ODD AND EVEN
 int nearestsquarenum(double n) {
     int t1 = ceil(sqrt(n));
     int t2 = floor(sqrt(n));
@@ -202,8 +202,7 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
             i += tmp;
             E2 /= 10;
             if (i > 9) {
-                E2 = i;
-                i = 0;
+                i %= 10;
             }
         }
         p3 = P[i % 10];
