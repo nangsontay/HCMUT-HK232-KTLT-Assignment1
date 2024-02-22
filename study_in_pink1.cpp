@@ -302,7 +302,14 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     }
 }
 
-// Task 4
+// Task 4 : CLEARED
+bool checkUnvalidChar(char c) {
+    if ((c >= 'A') && (c <= 'Z')) return false;
+    if ((c >= 'a') && (c <= 'z')) return false;
+    if ((c >= '0') && (c <= '9')) return false;
+    if ((c == '!') || (c == '@') || (c == '#') || (c == '$') || (c == '%')) return false;
+    return true;
+}
 int checkPassword(const char *s, const char *email) {
     // TODO: Complete this function
     string pass = s, temp_email = email;
@@ -332,8 +339,9 @@ int checkPassword(const char *s, const char *email) {
         if ((pass[i] == pass[i + 1]) && (pass[i] == pass[i + 2])) return (-1 * (400 + i));
     //check special characters
     const char specialchar[5] = {'!', '@', '#', '$', '%'};
+    const char * specchar = "!@#$%";
     bool check = false;
-    for (int i = 0; i < pass.length(); ++i) {
+    for (int i = 0; i < (pass.length()-1); ++i) {
         for (int j = 0; j < 5; ++j)
             if (pass[i] == specialchar[j]) {
                 check = true;
@@ -342,7 +350,9 @@ int checkPassword(const char *s, const char *email) {
         if (check) break;
     }
     if (!check) return -5;
-
+    //check the remaining cases:
+    for (int i=0; i<(pass.length()-1); ++i)
+        if (checkUnvalidChar(pass[i])) return (i);
     return -99;
 }
 
