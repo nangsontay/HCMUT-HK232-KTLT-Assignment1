@@ -15,22 +15,17 @@ using namespace std;
 
 void sa_tc_01() {
     cout << "----- Sample Testcase 01 -----" << endl;
-    string input_file("sa_tc_01_input");
-    int HP1, HP2, EXP1, EXP2, M1, M2, E1, E2, E3;
-    if (!readFile(input_file, HP1, HP2, EXP1, EXP2, M1, M2, E1, E2, E3)) {
-        return;
-    }
 
-    cout << "EXP1: " << EXP1 << ", EXP2: " << EXP2 << ", E1: " << E1 << endl;
-    int result1 = firstMeet(EXP1, EXP2, E1);
-    cout << "EXP1: " << EXP1 << ", EXP2: " << EXP2 << ", result: " << result1 << endl;
-    E2 = 39;
-    HP1 = 333;
-    EXP1 = 430;
-    M1 = 890;
-    cout << "EXP1: " << EXP1 << ", EXP2: " << EXP2 << ", E1: " << E2 << endl;
-    int result2 = traceLuggage(HP1, EXP1, M1, E2);
-    cout << "EXP1: " << EXP1 << ", EXP2: " << EXP2 << ", result: " << result2 << " HP1: " << HP1 << endl;
+    int HP1, HP2, EXP1, EXP2, M1, M2, E1, E2, E3;
+
+    E3 = 99;
+    HP1 = 400;
+    EXP1 = 600;
+    HP2 = 350;
+    EXP2 = 500;
+    int result3 = chaseTaxi(HP1, EXP1, HP2, EXP2, E3);
+    cout << "Result 3: " << result3 << " E3 " << E3 << " HP1 " << HP1 << " EXP1 " << EXP1 << " HP2 " << HP2 << " EXP2 "
+         << EXP2 << endl;
     cout << checkPassword("tantrietha@#", "anhtandeptrai@gmail.com");
 }
 

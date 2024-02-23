@@ -245,11 +245,27 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
             taxi[i][j] = temp;
         }
     }
+    //debugging only
+//    for (int i = 0; i < 10; i++) {
+//        for (int j = 0; j < 10; j++) {
+//            cout << taxi[i][j] << " ";
+//        }
+//        cout << endl;
+//    }
     //Finding the meeting point:
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
-            if (taxi[i][j] > (E3 * 2)) ++meetx;
-            if (taxi[i][j] < (E3 * -1)) ++meety;
+            if (taxi[i][j] > (E3 * 2)) {
+                ++meetx;
+                //Debugging only
+                //cout << taxi[i][j] << " MORE ";
+            }
+
+            if (taxi[i][j] < (E3 * -1)) {
+                ++meety;
+                //Debugging only
+                //cout << taxi[i][j] << " LESS ";
+            }
         }
     }
     meetx = simplifyNum(meetx);
@@ -267,37 +283,44 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     //Duyet nua cheo phai duoi
     x = meetx;
     y = meety;
-    while ((x != 9) && (y != -1)) {
+    while ((x != 10) && (y != -1)) {
         if (taxi[x][y] > max) max = taxi[x][y];
         ++x;
         --y;
     }
     x = meetx;
     y = meety;
-    while ((x != -1) && (y != 9)) {
+    while ((x != -1) && (y != 10)) {
         if (taxi[x][y] > max) max = taxi[x][y];
         --x;
         ++y;
     }
     x = meetx;
     y = meety;
-    while ((x != 9) && (y != 9)) {
+    while ((x != 10) && (y != 10)) {
         if (taxi[x][y] > max) max = taxi[x][y];
         ++x;
         ++y;
     }
     //Check if they can meet at meeting point
+    int tempcheck = taxi[meetx][meety];
     if (abs(taxi[meetx][meety]) > abs(max)) {
         EXP1 -= floor((double) EXP1 * 12 / 100);
         HP1 -= floor((double) HP1 * 10 / 100);
         EXP2 -= floor((double) EXP2 * 12 / 100);
         HP2 -= floor((double) HP2 * 10 / 100);
+        checkData(HP1, HP2);
+        checkexp(EXP1);
+        checkexp(EXP2);
         return taxi[meetx][meety];
     } else {
         EXP1 += ceil((double) EXP1 * 12 / 100);
         HP1 += ceil((double) HP1 * 10 / 100);
         EXP2 += ceil((double) EXP2 * 12 / 100);
         HP2 += ceil((double) HP2 * 10 / 100);
+        checkData(HP1, HP2);
+        checkexp(EXP1);
+        checkexp(EXP2);
         return max;
     }
 }
@@ -310,6 +333,7 @@ bool checkUnvalidChar(char c) {
     if ((c == '!') || (c == '@') || (c == '#') || (c == '$') || (c == '%')) return false;
     return true;
 }
+
 int checkPassword(const char *s, const char *email) {
     // TODO: Complete this function
     string pass = s, temp_email = email;
@@ -339,9 +363,9 @@ int checkPassword(const char *s, const char *email) {
         if ((pass[i] == pass[i + 1]) && (pass[i] == pass[i + 2])) return (-1 * (400 + i));
     //check special characters
     const char specialchar[5] = {'!', '@', '#', '$', '%'};
-    const char * specchar = "!@#$%";
+    const char *specchar = "!@#$%";
     bool check = false;
-    for (int i = 0; i < (pass.length()-1); ++i) {
+    for (int i = 0; i < (pass.length() - 1); ++i) {
         for (int j = 0; j < 5; ++j)
             if (pass[i] == specialchar[j]) {
                 check = true;
@@ -351,7 +375,7 @@ int checkPassword(const char *s, const char *email) {
     }
     if (!check) return -5;
     //check the remaining cases:
-    for (int i=0; i<(pass.length()-1); ++i)
+    for (int i = 0; i < (pass.length() - 1); ++i)
         if (checkUnvalidChar(pass[i])) return (i);
     return -99;
 }
