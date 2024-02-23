@@ -14,19 +14,12 @@
 using namespace std;
 
 void sa_tc_01() {
-    cout << "----- Sample Testcase 01 -----" << endl;
-
-    int HP1, HP2, EXP1, EXP2, M1, M2, E1, E2, E3;
-
-    E3 = 99;
-    HP1 = 400;
-    EXP1 = 600;
-    HP2 = 350;
-    EXP2 = 500;
-    int result3 = chaseTaxi(HP1, EXP1, HP2, EXP2, E3);
-    cout << "Result 3: " << result3 << " E3 " << E3 << " HP1 " << HP1 << " EXP1 " << EXP1 << " HP2 " << HP2 << " EXP2 "
-         << EXP2 << endl;
-    cout << checkPassword("tantrietha@#", "anhtandeptrai@gmail.com");
+    cout << "----- Sample Testcase 08 -----" << endl;
+    const char * arr_pwds[] = {"123xyz", "pink#pink", "pink123", "xxxx@xxxx", "pink#pink", "pink123", "pink123"};
+    int num_pwds = 7;
+    cout << "num_pwds: " << num_pwds << endl;
+    int result = findCorrectPassword(arr_pwds, num_pwds);
+    cout << "num_pwds: " << num_pwds << ", result: " << result << endl;
 }
 
 int main(int argc, const char *argv[]) {
