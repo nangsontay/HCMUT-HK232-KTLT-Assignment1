@@ -421,7 +421,6 @@ int findCorrectPassword(const char *arr_pwds[], int num_pwds) {
     }
     return max_position;
 }
-
 //Done, fuck the assignment, fuck BKU
 ////////////////////////////////////////////////
 /// END OF STUDENT'S ANSWER
