@@ -33,9 +33,12 @@ bool readFile(
 /// DO NOT modify any parameters in the functions.
 ////////////////////////////////////////////////////////////////////////
 //Recheck and reset the data for each task
-void checkData(int &HP, int &M) {
+void checkHP(int &HP) {
     if (HP > 666) HP = 666;
     if (HP < 0) HP = 0;
+}
+
+void checkM(int &M) {
     if (M > 3000) M = 3000;
     if (M < 0) M = 0;
 }
@@ -71,18 +74,18 @@ int firstMeet(int &exp1, int &exp2, int e1) {
         if (d % 2 == 0) exp1 += ceil((double) d / 200);
         else exp1 -= floor((double) d / 100);
     } else {
-        if (e1 <= 19) exp2 += (e1 / 4 + 19);
-        else if (e1 <= 49) exp2 += (e1 / 9 + 21);
-        else if (e1 <= 65) exp2 += (e1 / 16 + 17);
+        if (e1 <= 19) exp2 += ceil((double) e1 / 4 + 19);
+        else if (e1 <= 49) exp2 += ceil((double) e1 / 9 + 21);
+        else if (e1 <= 65) exp2 += ceil((double) e1 / 16 + 17);
         else if (e1 <= 79) {
-            exp2 += (e1 / 4 + 19);
-            if (exp2 > 200) exp2 += (e1 / 9 + 21);
+            exp2 += ceil((double) e1 / 4 + 19);
+            if (exp2 > 200) exp2 += ceil((double) e1 / 9 + 21);
         } else {
-            exp2 += (e1 / 4 + 19);
-            exp2 += (e1 / 9 + 21);
+            exp2 += ceil((double) e1 / 4 + 19);
+            exp2 += ceil((double) e1 / 9 + 21);
             if (exp2 > 400) {
-                exp2 += (e1 / 16 + 17);
-                exp2 *= (15 / 100);
+                exp2 += ceil((double) e1 / 16 + 17);
+                exp2 += ceil((double) exp2 * (15 / 100.0));
             }
         }
         exp1 -= e1;
@@ -158,7 +161,8 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
             break;
         }
     }
-    checkData(HP1, M1);
+    checkHP(HP1);
+    checkM(M1);
     checkexp(EXP1);
     return spent;
 }
@@ -188,7 +192,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         HP1 -= floor((double) HP1 * 17 / 100);
         EXP1 += ceil((double) EXP1 * 17 / 100);
     }
-    checkData(HP1, M1);
+    checkHP(HP1);
+    checkM(M1);
     checkexp(EXP1);
     double p2 = calculateP(EXP1);
     //Road3
@@ -207,7 +212,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         }
         p3 = P[i % 10];
     }
-    checkData(HP1, M1);
+    checkHP(HP1);
+    checkM(M1);
     checkexp(EXP1);
     if ((p1 == 100) && (p2 == 100) && (p3 == 100)) EXP1 -= floor((double) EXP1 * 25 / 100);
     else {
@@ -221,7 +227,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         }
     }
     checkexp(EXP1);
-    checkData(HP1, M1);
+    checkHP(HP1);
+    checkM(M1);
     return HP1 + EXP1 + M1;
 }
 
@@ -309,7 +316,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         HP1 -= floor((double) HP1 * 10 / 100);
         EXP2 -= floor((double) EXP2 * 12 / 100);
         HP2 -= floor((double) HP2 * 10 / 100);
-        checkData(HP1, HP2);
+        checkHP(HP1);
         checkexp(EXP1);
         checkexp(EXP2);
         return taxi[meetx][meety];
@@ -318,7 +325,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         HP1 += ceil((double) HP1 * 10 / 100);
         EXP2 += ceil((double) EXP2 * 12 / 100);
         HP2 += ceil((double) HP2 * 10 / 100);
-        checkData(HP1, HP2);
+        checkHP(HP1);
         checkexp(EXP1);
         checkexp(EXP2);
         return max;
@@ -326,7 +333,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
 }
 
 // Task 4 : CLEARED
-bool checkUnvalidChar(char c) {
+bool checkInvalidChar(char c) {
     if ((c >= 'A') && (c <= 'Z')) return false;
     if ((c >= 'a') && (c <= 'z')) return false;
     if ((c >= '0') && (c <= '9')) return false;
@@ -335,7 +342,6 @@ bool checkUnvalidChar(char c) {
 }
 
 int checkPassword(const char *s, const char *email) {
-    // TODO: Complete this function
     string pass = s, temp_email = email;
     if (pass.length() < 8) return -1;
     if (pass.length() > 20) return -2;
@@ -363,7 +369,6 @@ int checkPassword(const char *s, const char *email) {
         if ((pass[i] == pass[i + 1]) && (pass[i] == pass[i + 2])) return (-1 * (400 + i));
     //check special characters
     const char specialchar[5] = {'!', '@', '#', '$', '%'};
-    const char *specchar = "!@#$%";
     bool check = false;
     for (int i = 0; i < (pass.length() - 1); ++i) {
         for (int j = 0; j < 5; ++j)
@@ -376,18 +381,19 @@ int checkPassword(const char *s, const char *email) {
     if (!check) return -5;
     //check the remaining cases:
     for (int i = 0; i < (pass.length() - 1); ++i)
-        if (checkUnvalidChar(pass[i])) return (i);
-    return -99;
+        if (checkInvalidChar(pass[i])) return (i);
+    return -10;
 }
 
 // Task 5
 int findCorrectPassword(const char *arr_pwds[], int num_pwds) {
     // TODO: Complete this function
+    //Using fuck C++
 
     return -1;
 }
 
-
+//Done, fuck the assignment, fuck BKU
 ////////////////////////////////////////////////
 /// END OF STUDENT'S ANSWER
 ////////////////////////////////////////////////

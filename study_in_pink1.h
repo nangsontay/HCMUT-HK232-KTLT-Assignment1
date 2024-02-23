@@ -23,7 +23,9 @@ readFile(const string &filename, int &HP1, int &HP2, int &EXP1, int &EXP2, int &
 ////////////////////////////////////////////////////////////////////////
 
 //Hàm viết thêm ở đây
-void checkData(int &HP, int &M);
+void checkHP(int &HP);
+
+void checkM(int &M);
 
 bool checkTask(int e);
 
@@ -38,7 +40,8 @@ int road2(int &HP1, int &EXP1, int &M1, int cases);
 double calculateP(int EXP1);
 
 int simplifyNum(int a);
-bool checkUnvalidChar(char c);
+
+bool checkInvalidChar(char c);
 
 // Task 1
 int firstMeet(int &exp1, int &exp2, int e1);
