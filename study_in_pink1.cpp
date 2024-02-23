@@ -385,12 +385,26 @@ int checkPassword(const char *s, const char *email) {
     return -10;
 }
 
-// Task 5
+// Task 5: CLEARED
 int findCorrectPassword(const char *arr_pwds[], int num_pwds) {
-    // TODO: Complete this function
-    //Using fuck C++
-
-    return -1;
+    //Using fuck C string library
+    int max_appear = 0, max_position = 0;
+    for (int i = 0; i <= (num_pwds - 1); ++i) {
+        int compare = 0;
+        int position = i;
+        for (int j = 0; j <= (num_pwds - 1); ++j) {
+            if ((strcmp(arr_pwds[i], arr_pwds[j]) == 0)) ++compare;
+        }
+        if (compare == max_appear) {
+            size_t comparesize = strlen(arr_pwds[position]);
+            size_t maxsize = strlen(arr_pwds[max_position]);
+            if (comparesize > maxsize) {
+                max_position = position;
+                max_appear = compare;
+            }
+        } else if (compare > max_appear) max_appear = compare;
+    }
+    return max_position;
 }
 
 //Done, fuck the assignment, fuck BKU
