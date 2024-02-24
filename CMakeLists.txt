@@ -6,9 +6,10 @@ project(Assignment1)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 include_directories(.)
-
 add_executable(initial
         main.cpp
+        #main2.cpp
         main.h
         study_in_pink1.cpp
-        study_in_pink1.h)
+        study_in_pink1.h
+)

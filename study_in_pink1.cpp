@@ -55,7 +55,7 @@ void checkexp(int &exp) {
 // Task 1: CLEARED
 int firstMeet(int &exp1, int &exp2, int e1) {
     if (!checkTask(e1)) return -99;
-    if (e1 <= 4) {
+    if (e1 < 4) {
         switch (e1) {
             case 0:
                 exp2 += 29;
@@ -317,6 +317,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         EXP2 -= floor((double) EXP2 * 12 / 100);
         HP2 -= floor((double) HP2 * 10 / 100);
         checkHP(HP1);
+        checkHP(HP2);
         checkexp(EXP1);
         checkexp(EXP2);
         return taxi[meetx][meety];
@@ -326,6 +327,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         EXP2 += ceil((double) EXP2 * 12 / 100);
         HP2 += ceil((double) HP2 * 10 / 100);
         checkHP(HP1);
+        checkHP(HP2);
         checkexp(EXP1);
         checkexp(EXP2);
         return max;
@@ -417,7 +419,7 @@ int findCorrectPassword(const char *arr_pwds[], int num_pwds) {
         } else if (compare > max_appear) {
             max_appear = compare;
             max_position = i;
-        };
+        }
     }
     return max_position;
 }
