@@ -382,7 +382,7 @@ int checkPassword(const char *s, const char *email) {
     }
     if (!check) return -5;
     //check the remaining cases:
-    for (int i = 0; i < (pass.length() - 1); ++i)
+    for (int i = 0; i < (pass.length()); ++i)
         if (checkInvalidChar(pass[i])) return (i);
     return -10;
 }
