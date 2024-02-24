@@ -356,9 +356,9 @@ int checkPassword(const char *s, const char *email) {
         if (pass[i] == se[0]) {
             //Check if the password contains the "se" string
             bool check = true;
-            //first element is already checked
-            for (int j = i + 1; j < se.length(); ++j) {
-                if (pass[j] != se[j]) {
+            //First char was checked, skip
+            for (int j = 1; j < se.length(); ++j) {
+                if (pass[i + j] != se[j]) {
                     check = false;
                     break;
                 }
@@ -372,7 +372,7 @@ int checkPassword(const char *s, const char *email) {
     //check special characters
     const char specialchar[5] = {'!', '@', '#', '$', '%'};
     bool check = false;
-    for (int i = 0; i < (pass.length() - 1); ++i) {
+    for (int i = 0; i < (pass.length()); ++i) {
         for (int j = 0; j < 5; ++j)
             if (pass[i] == specialchar[j]) {
                 check = true;
