@@ -55,6 +55,8 @@ void checkexp(int &exp) {
 // Task 1: CLEARED
 int firstMeet(int &exp1, int &exp2, int e1) {
     if (!checkTask(e1)) return -99;
+    checkexp(exp1);
+    checkexp(exp2);
     if (e1 <= 4) {
         switch (e1) {
             case 0:
@@ -170,6 +172,9 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
 int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     //check E first
     if (!checkTask(E2)) return -99;
+    checkexp(EXP1);
+    checkHP(HP1);
+    checkM(M1);
     //Road1
     double p1 = calculateP(EXP1);
     //Road2
@@ -243,6 +248,10 @@ int simplifyNum(int a) {
 
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     if (!checkTask(E3)) return -99;
+    checkHP(HP1);
+    checkexp(EXP1);
+    checkHP(HP2);
+    checkexp(EXP2);
     int taxi[10][10];
     int meetx = 0, meety = 0;
     //Taxi point:
