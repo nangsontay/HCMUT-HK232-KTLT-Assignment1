@@ -243,7 +243,7 @@ int simplifyNum(int a) {
 
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     if (!checkTask(E3)) return -99;
-    int taxi[10][10],
+    int taxi[10][10];
     int meetx = 0, meety = 0;
     //Taxi point:
     for (int i = 0; i < 10; i++) {
