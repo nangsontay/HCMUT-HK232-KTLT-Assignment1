@@ -114,7 +114,7 @@ double calculateP(int EXP1) {
     int sqnum = nearestsquarenum(EXP1);
     double p;
     if (EXP1 >= sqnum) p = 100;
-    else p = ceil((((double) EXP1 / sqnum + 80.0) / 123.0) * 100);
+    else p = ceil((((double) EXP1 / sqnum + 80.0) / 123.0) * 100.0);
 
     return p;
 }
@@ -168,6 +168,8 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
 }
 
 int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
+    //check E first
+    if (!checkTask(E2)) return -99;
     //Road1
     double p1 = calculateP(EXP1);
     //Road2
@@ -212,9 +214,6 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         }
         p3 = P[i % 10];
     }
-    checkHP(HP1);
-    checkM(M1);
-    checkexp(EXP1);
     if ((p1 == 100) && (p2 == 100) && (p3 == 100)) EXP1 -= floor((double) EXP1 * 25 / 100);
     else {
         double pall = (p1 + p2 + p3) / 3.0;
@@ -243,7 +242,8 @@ int simplifyNum(int a) {
 }
 
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
-    int taxi[10][10], sherlock[10][10];
+    if (!checkTask(E3)) return -99;
+    int taxi[10][10],
     int meetx = 0, meety = 0;
     //Taxi point:
     for (int i = 0; i < 10; i++) {
@@ -317,6 +317,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         EXP2 -= floor((double) EXP2 * 12 / 100);
         HP2 -= floor((double) HP2 * 10 / 100);
         checkHP(HP1);
+        checkHP(HP2);
         checkexp(EXP1);
         checkexp(EXP2);
         return taxi[meetx][meety];
@@ -326,6 +327,7 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
         EXP2 += ceil((double) EXP2 * 12 / 100);
         HP2 += ceil((double) HP2 * 10 / 100);
         checkHP(HP1);
+        checkHP(HP2);
         checkexp(EXP1);
         checkexp(EXP2);
         return max;
