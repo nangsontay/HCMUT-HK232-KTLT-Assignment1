@@ -108,7 +108,6 @@ int nearestsquarenum(double n) {
 }
 
 bool halfspentcheck(double M1, double spent) {
-    if (M1==0) return true;
     if (spent > (M1 / 2)) return true;
     else return false;
 }
@@ -117,7 +116,7 @@ double calculateP(int EXP1) {
     int sqnum = nearestsquarenum(EXP1);
     double p;
     if (EXP1 >= sqnum) p = 100;
-    else p = ceil((((double) EXP1 / sqnum + 80.0) / 123.0) * 100.0);
+    else p = ceil((((double) EXP1 / sqnum + 80.0) / 123.0) * 100);
 
     return p;
 }
@@ -171,11 +170,10 @@ int road2(int &HP1, int &EXP1, int &M1, int cases) //Use variables ref from trac
 }
 
 int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
-    //check E first
     if (!checkTask(E2)) return -99;
-    checkexp(EXP1);
     checkHP(HP1);
     checkM(M1);
+    checkexp(EXP1);
     //Road1
     double p1 = calculateP(EXP1);
     //Road2
@@ -184,8 +182,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         int spent = 0;
         int temp = M1;
         for (int i = 1; i <= 3; i++) {
-            if (halfspentcheck(temp, spent)) break;
             spent += road2(HP1, EXP1, M1, i);
+            if (halfspentcheck(temp, spent)) break;
             if (i + 1 > 3) i = 0;
         }
         HP1 -= floor((double) HP1 * 17 / 100);
@@ -220,6 +218,9 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         }
         p3 = P[i % 10];
     }
+    checkHP(HP1);
+    checkM(M1);
+    checkexp(EXP1);
     if ((p1 == 100) && (p2 == 100) && (p3 == 100)) EXP1 -= floor((double) EXP1 * 25 / 100);
     else {
         double pall = (p1 + p2 + p3) / 3.0;
@@ -250,10 +251,10 @@ int simplifyNum(int a) {
 int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     if (!checkTask(E3)) return -99;
     checkHP(HP1);
-    checkexp(EXP1);
     checkHP(HP2);
+    checkexp(EXP1);
     checkexp(EXP2);
-    int taxi[10][10];
+    int taxi[10][10], sherlock[10][10];
     int meetx = 0, meety = 0;
     //Taxi point:
     for (int i = 0; i < 10; i++) {
@@ -366,9 +367,9 @@ int checkPassword(const char *s, const char *email) {
         if (pass[i] == se[0]) {
             //Check if the password contains the "se" string
             bool check = true;
-            //first element is already checked
-            for (int j = i + 1; j < se.length(); ++j) {
-                if (pass[j] != se[j]) {
+            //First char was checked, skip
+            for (int j = 1; j < se.length(); ++j) {
+                if (pass[i + j] != se[j]) {
                     check = false;
                     break;
                 }
@@ -392,19 +393,47 @@ int checkPassword(const char *s, const char *email) {
     }
     if (!check) return -5;
     //check the remaining cases:
-    for (int i = 0; i < (pass.length() - 1); ++i)
+    for (int i = 0; i < (pass.length()); ++i)
         if (checkInvalidChar(pass[i])) return (i);
     return -10;
 }
 
-// Task 5
+// Task 5: CLEARED
 int findCorrectPassword(const char *arr_pwds[], int num_pwds) {
-    // TODO: Complete this function
-    //Using fuck C++
-
-    return -1;
+    //Using fuck C string library
+    int max_appear = 0, max_position = 0;
+    //An array to store the status counted/uncounted strings.
+    bool checked[num_pwds];
+    for (int i = 0; i <= (num_pwds - 1); ++i) {
+        checked[i] = false;
+    }
+    //Count here
+    for (int i = 0; i <= (num_pwds - 1); ++i) {
+        //Skip counted strings
+        if (checked[i]) continue;
+        int compare = 0;
+        int position = i;
+        for (int j = 0; j <= (num_pwds - 1); ++j) {
+            if ((strcmp(arr_pwds[i], arr_pwds[j]) == 0)) {
+                ++compare;
+                //Mark string as counted;
+                checked[j] = true;
+            };
+        }
+        if (compare == max_appear) {
+            size_t comparesize = strlen(arr_pwds[position]);
+            size_t maxsize = strlen(arr_pwds[max_position]);
+            if (comparesize > maxsize) {
+                max_position = position;
+                max_appear = compare;
+            }
+        } else if (compare > max_appear) {
+            max_appear = compare;
+            max_position = i;
+        }
+    }
+    return max_position;
 }
-
 //Done, fuck the assignment, fuck BKU
 ////////////////////////////////////////////////
 /// END OF STUDENT'S ANSWER
