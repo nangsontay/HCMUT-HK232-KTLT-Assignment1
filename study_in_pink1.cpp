@@ -57,7 +57,7 @@ int firstMeet(int &exp1, int &exp2, int e1) {
     if (!checkTask(e1)) return -99;
     checkexp(exp1);
     checkexp(exp2);
-    if (e1 <= 4) {
+    if (e1 < 4) {
         switch (e1) {
             case 0:
                 exp2 += 29;
@@ -108,6 +108,7 @@ int nearestsquarenum(double n) {
 }
 
 bool halfspentcheck(double M1, double spent) {
+    if (M1==0) return true;
     if (spent > (M1 / 2)) return true;
     else return false;
 }
@@ -183,8 +184,8 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         int spent = 0;
         int temp = M1;
         for (int i = 1; i <= 3; i++) {
-            spent += road2(HP1, EXP1, M1, i);
             if (halfspentcheck(temp, spent)) break;
+            spent += road2(HP1, EXP1, M1, i);
             if (i + 1 > 3) i = 0;
         }
         HP1 -= floor((double) HP1 * 17 / 100);
@@ -381,7 +382,7 @@ int checkPassword(const char *s, const char *email) {
     //check special characters
     const char specialchar[5] = {'!', '@', '#', '$', '%'};
     bool check = false;
-    for (int i = 0; i < (pass.length() - 1); ++i) {
+    for (int i = 0; i < (pass.length()); ++i) {
         for (int j = 0; j < 5; ++j)
             if (pass[i] == specialchar[j]) {
                 check = true;
