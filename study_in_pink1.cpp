@@ -182,6 +182,7 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
         int spent = 0;
         int temp = M1;
         for (int i = 1; i <= 3; i++) {
+            if (M1 == 0) break;
             spent += road2(HP1, EXP1, M1, i);
             if (halfspentcheck(temp, spent)) break;
             if (i + 1 > 3) i = 0;
@@ -191,6 +192,7 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     } else {
         //Check E2: Even
         for (int i = 1; i <= 3; i++) {
+            if (M1 == 0) break;
             road2(HP1, EXP1, M1, i);
             if (M1 <= 0) break;
         }
