@@ -1,4 +1,5 @@
 #include "study_in_pink1.h"
+#pragma gcc diagnostic ignored "-Wunused-parameter"
 
 bool readFile(
         const string &filename,
@@ -181,12 +182,12 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
     if (E2 % 2 != 0) {
         int spent = 0;
         int temp = M1;
-        for (int i = 1; i <= 3; i++) {
-            if (M1 == 0) break;
-            spent += road2(HP1, EXP1, M1, i);
-            if (halfspentcheck(temp, spent)) break;
-            if (i + 1 > 3) i = 0;
-        }
+        if (M1 != 0)
+            for (int i = 1; i <= 3; i++) {
+                spent += road2(HP1, EXP1, M1, i);
+                if (halfspentcheck(temp, spent)) break;
+                if (i + 1 > 3) i = 0;
+            }
         HP1 -= floor((double) HP1 * 17 / 100);
         EXP1 += ceil((double) EXP1 * 17 / 100);
     } else {
@@ -196,7 +197,6 @@ int traceLuggage(int &HP1, int &EXP1, int &M1, int E2) {
             road2(HP1, EXP1, M1, i);
             if (M1 <= 0) break;
         }
-        if (M1 < 0) M1 = 0;
         HP1 -= floor((double) HP1 * 17 / 100);
         EXP1 += ceil((double) EXP1 * 17 / 100);
     }
@@ -265,26 +265,15 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
             taxi[i][j] = temp;
         }
     }
-    //debugging only
-//    for (int i = 0; i < 10; i++) {
-//        for (int j = 0; j < 10; j++) {
-//            cout << taxi[i][j] << " ";
-//        }
-//        cout << endl;
-//    }
     //Finding the meeting point:
     for (int i = 0; i < 10; i++) {
         for (int j = 0; j < 10; j++) {
             if (taxi[i][j] > (E3 * 2)) {
                 ++meetx;
-                //Debugging only
-                //cout << taxi[i][j] << " MORE ";
             }
 
             if (taxi[i][j] < (E3 * -1)) {
                 ++meety;
-                //Debugging only
-                //cout << taxi[i][j] << " LESS ";
             }
         }
     }
@@ -294,13 +283,11 @@ int chaseTaxi(int &HP1, int &EXP1, int &HP2, int &EXP2, int E3) {
     int max = taxi[meetx][meety];
     int x = meetx;
     int y = meety;
-    //Duyet nua cheo trai tren
     while ((x != -1) && (y != -1)) {
         if (taxi[x][y] > max) max = taxi[x][y];
         --x;
         --y;
     }
-    //Duyet nua cheo phai duoi
     x = meetx;
     y = meety;
     while ((x != 10) && (y != -1)) {
@@ -355,7 +342,6 @@ bool checkInvalidChar(char c) {
     if ((c == '!') || (c == '@') || (c == '#') || (c == '$') || (c == '%')) return false;
     return true;
 }
-
 int checkPassword(const char *s, const char *email) {
     string pass = s, temp_email = email;
     if (pass.length() < 8) return -1;
@@ -383,15 +369,12 @@ int checkPassword(const char *s, const char *email) {
     for (int i = 0; i < pass.length(); ++i)
         if ((pass[i] == pass[i + 1]) && (pass[i] == pass[i + 2])) return (-1 * (400 + i));
     //check special characters
-    const char specialchar[5] = {'!', '@', '#', '$', '%'};
     bool check = false;
     for (int i = 0; i < (pass.length()); ++i) {
-        for (int j = 0; j < 5; ++j)
-            if (pass[i] == specialchar[j]) {
+            if ((pass[i] == '@') || (pass[i] == '#') || (pass[i] == '%') || (pass[i] == '$') || (pass[i] == '!')){
                 check = true;
                 break;
             }
-        if (check) break;
     }
     if (!check) return -5;
     //check the remaining cases:
